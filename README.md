@@ -13,12 +13,8 @@ In a new terminal window:
 ### This is a status Tray desktop application.
 A simple application that can help you manage your tasks effectively.
 
+<p float="left">
 <img src="src/assets/ss1.png" alt="Active Tasks" width="200" height="300" />
 <img src="src/assets/ss2.png" alt="All Tasks" width="200" height="300" />
 <img src="src/assets/ss3.png" alt="Settings" width="200" height="300" />
-
-![Active Tasks](src/assets/ss1.png);
-
-![All Tasks](src/assets/ss2.png);
-
-![Settings](src/assets/ss3.png);
+ </p>
