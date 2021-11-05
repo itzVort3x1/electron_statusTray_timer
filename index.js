@@ -1,4 +1,5 @@
 const electron = require('electron');
+const TimerTray = require('./app/timer_tray');
 
 const { app, BrowserWindow, ipcMain, Tray } = electron;
 
@@ -16,29 +17,13 @@ app.on('ready', () => {
             nodeIntegration: true
         }
     });
+    process.platform === 'darwin' ? app.dock.hide() : mainWindow.setSkipTaskbar(true);
     mainWindow.loadURL(`file://${__dirname}/src/index.html`);
-
-    const iconName = process.platform === 'win32' ? 'clock.png' : 'iconTemplate.png';
-    const iconPath = `${__dirname}/src/assets/${iconName}`;
-    tray = new Tray(iconPath);
-    tray.on('click', (event, bounds) => {
-        // Click event bounds
-        const { x, y } = bounds;
-
-        // Window height and width
-        const { width, height } = mainWindow.getBounds();
-
-        if(mainWindow.isVisible()){
-            mainWindow.hide();
-        }else {
-            const yPosition = process.platform === 'darwin' ? y : y - height;
-            mainWindow.setBounds({
-                x: Math.round(x - width /2),
-                y: Math.round(yPosition),
-                height,
-                width
-            })
-            mainWindow.show();
-        }
+    mainWindow.on('blur', () => {
+        mainWindow.hide();
     });
+
+    const iconName = process.platform === 'win32' ? 'alarm.png' : 'iconTemplate.png';
+    const iconPath = `${__dirname}/src/assets/${iconName}`;
+    tray = new TimerTray(iconPath, mainWindow);
 });
