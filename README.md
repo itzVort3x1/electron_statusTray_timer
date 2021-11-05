@@ -9,3 +9,5 @@ Start dev server:
 In a new terminal window:
 
 `npm run electron`
+
+### This is a status Tray desktop application.
